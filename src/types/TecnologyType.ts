@@ -1,0 +1,1 @@
+export type TecnologyType = 'frontend' | 'backend' | 'cloud' | 'database' | '';

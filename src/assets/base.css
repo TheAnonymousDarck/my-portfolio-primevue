@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* --primary-50: #eef2ff;
+    --primary-100: #e0e7ff;
+    --primary-200: #c7d2fe;
+    --primary-300: #a5b4fc;
+    --primary-400: #818cf8;
+    --primary-500: #6366f1;
+    --primary-600: #4f46e5;
+    --primary-700: #4338ca;
+    --primary-800: #3730a3;
+    --primary-900: #312e81;
+    --primary-950: #1e1b4b; */
+
+    --primary-50: 238 242 255;
+    --primary-100: 224 231 255;
+    --primary-200: 199 210 254;
+    --primary-300: 165 180 252;
+    --primary-400: 129 140 248;
+    --primary-500: 99 102 241;
+    --primary-600: 79 70 229;
+    --primary-700: 67 56 202;
+    --primary-800: 55 48 163;
+    --primary-900: 49 46 129;
+    --primary-950: 30 27 75;
+
+
+    --surface-0: 255 255 255;
+    --surface-50: 248 250 252;
+    --surface-100: 241 245 249;
+    --surface-200: 226 232 240;
+    --surface-300: 203 213 225;
+    --surface-400: 148 163 184;
+    --surface-500: 100 116 139;
+    --surface-600: 71 85 105;
+    --surface-700: 45 55 72;
+    --surface-800: 30 41 59;
+    --surface-900: 15 23 42;
+    --surface-950: 3 6 23;
+}
+
+body {
+    @apply antialiased bg-slate-100 dark:bg-slate-800 dark:text-white;
+}
+
+h1 {
+    @apply font-bold text-center;
+}
+
+.content-section {
+    @apply flex flex-col;
+}
+
+@layer components {
+    
+}
+
+@layer base {
+
+}
+
+@layer utilities {
+    
+}

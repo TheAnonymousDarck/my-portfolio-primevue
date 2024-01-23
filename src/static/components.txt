@@ -1,0 +1,156 @@
+//!! Componentes sin terminar o posibles a usar  
+
+///////////////////////////////
+
+<a class="flex no-underline bg-gray-700 align-items-center justify-content-center flex-column border-round-xl "
+    :href="skills[1].docLink" target="_blank">
+    <!-- <div> -->
+
+    <img class="w-5 h-5 my-2" :src="skills[0].src" :alt="`${skills[0].name} icon`" />
+    <!-- <span class="text-2xl font-medium text-center select-none text-dark-blue">
+                        {{ skills[0].name }}
+                    </span> -->
+    <!-- </div> -->
+    <span class="mt-3 text-2xl font-medium text-blue-200 ">
+        {{ skills[0].name }}
+    </span>
+</a>
+
+///////////////////////////////
+
+<!-- <div class="flex flex-col justify-center gap-3 h-max">
+    <a class="w-32 w-28 h-28 xl: xl:h-32 2xl:w-36 2xl:h-36" :href="skill.data.docLink" target="_blank">
+        <img class="w-10 h-10" :src="skill.data.src" :alt="`${skill.data.name} icon`" />
+    </a>
+    <span class="text-2xl font-medium text-center select-none text-dark-blue">{{ skill.data.name }}</span>
+</div> -->
+
+// ! Contact Section
+TODO: solo si requieres o quieres agregar valiidaciones con vee validate
+<script setup lang="ts">
+import { useToast } from 'primevue/usetoast';
+// import { useField, useForm } from 'vee-validate';
+import Toast from 'primevue/toast';
+import Textarea from 'primevue/textarea';
+import InputText from 'primevue/inputtext';
+import { ref } from 'vue';
+import type { ContactForm } from '@/interfaces/ContactForm';
+import InputEmailC from '@/commons/InputEmailC.vue';
+
+const toast = useToast();
+// const { handleSubmit, resetForm } = useForm();
+// const { value, errorMessage } = useField('value', validateField);
+
+const errorMessage = '';
+
+const contactFormData = ref<ContactForm>({
+    name: '',
+    subject: '',
+    email: '',
+    description: ''
+});
+
+// const onSubmit = (data: any) => {
+const onSubmit = async (): Promise<void> => {
+    console.log("Formulario enviado:", contactFormData.value);
+
+    // Enviar un toast
+    toast.add({
+        severity: 'success',
+        summary: '¡Formulario Enviado!',
+        detail: '¡Gracias por ponerte en contacto conmigo!',
+        life: 3000 // Duración del toast en milisegundos
+    });
+}
+
+// function validateField(value: any) {
+
+//     console.log(`validateField: ${value}`);
+
+//     if (!value) {
+//         return 'Name - Surname is required.';
+//     }
+//     return true;
+// }
+
+// const onSubmit = handleSubmit((values) => {
+//     console.log(values.value);
+//     if (values.value && values.value.length > 0) {
+//         toast.add({ severity: 'info', summary: 'Form Submitted', detail: values.value, life: 3000 });
+
+//         resetForm();
+//     }
+// });
+
+
+
+// const onValidate = (data: any) => {
+//     console.log(data);
+// onSubmit();
+// };
+
+console.log(contactFormData.value);
+
+</script>
+
+<template>
+    <section class="section-content">
+        <h2> Contact </h2>
+
+        {{ errorMessage }}
+
+        <div class="">
+            <form @submit.prevent="onSubmit" class="flex flex-col gap-2">
+                <!-- <form @submit.prevent="onValidate" class="flex flex-col gap-2"> -->
+                <div class="flex flex-col gap-2">
+                    <label for="name">Name</label>
+                    <InputText id="name" v-model="contactFormData.name" aria-describedby="name-help"
+                        :class="{ 'invalid-field': errorMessage }" />
+                </div>
+                <small id="text-error" class="error-msg">{{ errorMessage || '&nbsp;' }}</small>
+
+                <div class="flex flex-col gap-2">
+                    <label for="subject">Subject</label>
+                    <InputText id="subject" v-model="contactFormData.subject" aria-describedby="subject-help"
+                        :class="{ 'invalid-field': errorMessage }" />
+                </div>
+                <small id="text-error" class="error-msg">{{ errorMessage || '&nbsp;' }}</small>
+
+                <div class="flex flex-col gap-2">
+                    <label for="email">Email</label>
+                    <InputText id="email" type="email" v-model="contactFormData.email" aria-describedby="email-help"
+                        :class="{ 'invalid-field': errorMessage }" maxlength="45" required />
+
+                    <!-- <InputEmailC id="email" v-model="contactFormData.email" aria-describedby="email-help"
+                        :class="{ 'invalid-field': errorMessage }" maxlength="45" required /> -->
+                </div>
+                <small id="text-error" class="error-msg">{{ errorMessage || '&nbsp;' }}</small>
+
+                <div class="flex flex-col gap-2">
+                    <label for="description">description</label>
+                    <Textarea id="description" :class="{ 'invalid-field': errorMessage }"
+                        v-model="contactFormData.description" aria-describedby="text-error" rows="4" cols="30"
+                        maxlength="650" required />
+                </div>
+                <small id="text-error" class="error-msg">{{ errorMessage || '&nbsp;' }}</small>
+
+                <Button type="submit" label="Submit" />
+            </form>
+            <Toast />
+        </div>
+    </section>
+</template>
+
+<style scoped>
+.section-content {
+    @apply flex flex-col items-center justify-center dark:text-white;
+}
+
+.invalid-field {
+    @apply border-8 border-red-500;
+}
+
+.error-msg {
+    @apply text-red-500;
+}
+</style>
